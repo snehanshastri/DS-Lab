@@ -1,0 +1,74 @@
+Stack Implementation
+
+#include<stdio.h>
+#define N 5
+int stack[N];
+int top=-1;
+void push()
+{
+    int x;
+    printf("Enter element to be pushed:\n");
+    scanf("%d",&x);
+    if(top==N)
+    {
+        printf("Stack overflow!");
+        return;
+    }
+    else
+    {
+    top++;
+    stack[top]=x;
+    printf("Element has been inserted.\n");
+}
+}
+void pop()
+{
+if(top==-1)
+{
+    printf("Underflow!\n");
+    return;
+}
+else
+{
+    top--;
+    printf("Element has been deleted.\n");
+}
+}
+void display()
+{
+    printf("Elements of the stack are:\n");
+    for(int i=top;i>=0;i--)
+    {
+        printf("%d\n",stack[i]);
+    }
+}
+void main()
+{
+     int c;
+    do
+    {
+    printf("Enter your choice:\n");
+    printf("1.Push\n");
+    printf("2.Pop\n");
+    printf("3.Display\n");
+    printf("4.Exit\n");
+    scanf("%d",&c);
+    switch(c)
+    {
+    case 1:
+        push();
+        break;
+    case 2:
+        pop();
+        break;
+    case 3:
+        display();
+        break;
+    case 4:
+        printf("Thank You!\n");
+    }
+    }while(c!=4);
+    printf("--------------------------------------------------------------");
+    printf("Sneha N Shastri - 1BM22CS283");
+}
+
