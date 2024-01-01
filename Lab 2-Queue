@@ -1,0 +1,70 @@
+#include<stdio.h>
+#define size 5
+
+int arr[100];
+int front=-1;
+int rear=-1;
+void add(int n)
+{
+
+    if(rear==size-1)
+    {
+
+        printf("Queue is full");
+    }
+    else if(rear==-1 && front ==-1)
+    {
+
+        rear=front=0;
+        arr[rear]=n;
+    }
+    else
+    {
+        rear++;
+        arr[rear]=n;
+    }
+}
+void delete()
+{
+
+    if(rear==-1 && front==-1)
+    {
+        printf("Queue is empty.\n");
+    }
+    else if(front==rear)
+        front=rear=-1;
+    else
+    {
+
+        printf("The element deleted is %d\n",arr[front]);
+        front++;
+    }
+}
+void display()
+{
+    if(front==-1 && rear==-1)
+    {
+        printf("Queue empty\n");
+    }
+    else
+    {
+        printf("The Queue is:\n");
+        for(int i=front;i<=rear;i++)
+        {
+            printf("%d",arr[i]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    add(1);
+    add(2);
+    add(3);
+    add(4);
+    add(5);
+    display();
+    delete();
+    delete();
+    delete();
+}
