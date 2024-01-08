@@ -1,0 +1,40 @@
+  int* searchRange(int* nums, int numsSize, int target, int* returnSize) {
+    int* result = (int*)malloc(2 * sizeof(int));
+    result[0] = -1;
+    result[1] = -1;
+    *returnSize = 2;
+
+    int lb = 0, ub = numsSize - 1;
+    int pos = -1;
+
+    // Binary search to find the target
+    while (lb <= ub && pos == -1) {
+        int mid = (lb+ub) / 2;
+        if (nums[mid] == target) {
+            pos = mid;
+        } else if (target > nums[mid]) {
+            lb = mid + 1;
+        } else {
+            ub = mid - 1;
+        }
+    }
+
+    if (pos != -1) {
+        // Search for the starting position
+        int start = pos;
+        while (start > 0 && nums[start - 1] == target) {
+            start--;
+        }
+
+        // Search for the ending position
+        int end = pos;
+        while (end < numsSize - 1 && nums[end + 1] == target) {
+            end++;
+        }
+
+        result[0] = start;
+        result[1] = end;
+    }
+
+    return result;
+}
