@@ -1,0 +1,133 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+void push(struct Node**head, int value)
+{
+    struct Node* newNode=(struct Node*)(malloc)(sizeof(struct Node));
+    newNode->data=value;
+    newNode->next=*head;
+    *head=newNode;
+}
+void popordequeue(struct Node** head)
+{
+    if(*head==NULL)
+    {
+        printf("Linked List is Empty.\n");
+        return;
+    }
+    struct Node*temp=*head;
+    *head=(*head)->next;
+    free(temp);
+}
+void enqueue(struct Node**head,int value)
+{
+    struct Node*newNode=(struct Node*)(malloc)(sizeof(struct Node));
+    struct Node*temp=*head;
+    newNode->data=value;
+    newNode->next=NULL;
+
+    if(*head==NULL)
+    {
+        *head=newNode;
+        return;
+    }
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=newNode;
+}
+void display(struct Node*head)
+{
+    struct Node*temp=head;
+    if(temp==NULL)
+    {
+        printf("Linked List is Empty.\n");
+        return;
+    }
+    while(temp!=NULL)
+    {
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+int main()
+{
+    int c;
+    struct Node*head=NULL;
+    struct Node*head2=NULL;
+    do
+    {
+    printf("Enter your choice:\n");
+    printf("1.Stack\n 2.Queue\n 3.Exit\n");
+    scanf("%d",&c);
+    switch(c)
+    {
+    case 1:
+        {
+        int x;
+        do
+        {
+        printf("1.Push\n 2.Pop\n 3.Display\n 4.Exit\n");
+        scanf("%d",&x);
+        switch(x)
+        {
+        case 1:
+            printf("Enter value to push:\n");
+            int y;
+            scanf("%d",&y);
+            push(&head,y);
+            break;
+        case 2:
+            popordequeue(&head);
+            break;
+        case 3:
+            display(head);
+            break;
+        case 4:
+            printf("Thank you.\n");
+            break;
+        }
+    }while(x!=4);
+        }
+    break;
+        case 2:
+            {
+            int x2;
+        do
+        {
+        printf("1.Enqueue\n 2.Dequeue\n 3.Display\n 4.Exit\n");
+        scanf("%d",&x2);
+        switch(x2)
+        {
+        case 1:
+            printf("Enter value to enqueue:\n");
+            int y2;
+            scanf("%d",&y2);
+            enqueue(&head,y2);
+            break;
+        case 2:
+            popordequeue(&head);
+            break;
+        case 3:
+            display(head);
+            break;
+        case 4:
+            printf("Thank you.\n");
+            break;
+        }
+    }while(x2!=4);
+    break;
+            }
+        case 3:
+            printf("Thank you.\n");
+            break;
+}
+    }while(c!=3);
+}
