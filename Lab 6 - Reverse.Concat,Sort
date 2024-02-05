@@ -1,0 +1,128 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+    int data;
+    struct Node*next;
+};
+struct Node*head1=NULL;
+struct Node*head2=NULL;
+
+struct Node* concat(struct Node*a, struct Node*b)
+{
+    struct Node*temp;
+    if(a==NULL)
+    {
+         a=b;
+        return a;
+    }
+    else if(b==NULL)
+        return a;
+    temp=a;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=b;
+    return a;
+}
+
+void sortList(struct Node* head)
+{
+    struct Node* current=head,*index=NULL;
+    int temp;
+    if(head==NULL)
+        return;
+    else
+    {
+        while(current!=NULL)
+        {
+            index=current->next;
+            while(index!=NULL)
+            {
+                if(current->data>index->data)
+                {
+                    temp=current->data;
+                    current->data=index->data;
+                    index->data=temp;
+                }
+                index=index->next;
+            }
+            current=current->next;
+        }
+    }
+}
+
+struct Node*reverse(struct Node*head)
+{
+    struct Node*temp=head;
+    struct Node*prev=NULL;
+    struct Node*front;
+    while(temp!=NULL)
+    {
+        front=temp->next;
+        temp->next=prev;
+        prev=temp;
+        temp=front;
+    }
+    return prev;
+};
+
+void insertatBegin(struct Node**head,int value)
+{
+    struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=value;
+    newNode->next=*head;
+    *head=newNode;
+}
+
+void display(struct Node*head)
+{
+    struct Node*temp=head;
+    if(temp==NULL)
+    {
+        printf("Linked List is Empty.\n");
+        return;
+    }
+    while(temp!=NULL)
+    {
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main()
+{
+   insertatBegin(&head1,1);
+   insertatBegin(&head1,3);
+    insertatBegin(&head1,2);
+    insertatBegin(&head2,1);
+    insertatBegin(&head2,3);
+    insertatBegin(&head2,2);
+    printf("Linked List 1:\n");
+    display(head1);
+
+    printf("Linked List 2:\n");
+    display(head2);
+
+    printf("Sorted List 1:\n");
+    sortList(head1);
+    display(head1);
+
+    printf("Sorted List 2:\n");
+    sortList(head2);
+    display(head2);
+
+    printf("Reversed List 1:\n");
+    struct Node*result1=reverse(head1);
+    display(result1);
+
+    printf("Reversed List 2:\n");
+    struct Node*result2=reverse(head2);
+    display(result2);
+
+    printf("Concatenated list:\n");
+    struct Node*result=concat(result1,result2);
+    display(result);
+}
